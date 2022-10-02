@@ -41,7 +41,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/snyk-labs/modern-npm-package.git"
+    "url": "https://github.com/chetzof/node-intertools.git"
   },
   "keywords": [
     "npm",
