@@ -6,7 +6,6 @@ import { FileCache } from './file-cache'
 
 export function intercept({ ttl }: { ttl?: number } = {}): () => void {
   const server = createServer({ ttl })
-
   nock(/.*/)
     .persist()
     .get(/.*/)
