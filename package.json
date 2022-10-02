@@ -79,7 +79,6 @@
     "eslint-plugin-unicorn": "^43.0.2",
     "eslint-plugin-unused-imports": "^2.0.0",
     "got": "^12.5.1",
-    "nock": "^13.2.9",
     "prettier": "^2.7.1",
     "semantic-release": "^19.0.5",
     "ts-node": "^10.9.1",
@@ -87,6 +86,7 @@
     "vitest": "^0.23.4"
   },
   "dependencies": {
+    "nock": "^13.2.9",
     "@fastify/reply-from": "^8.3.0",
     "@mswjs/interceptors": "^0.17.5",
     "abstract-cache": "^1.0.1",
