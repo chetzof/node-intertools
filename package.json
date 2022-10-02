@@ -28,7 +28,8 @@
     "semantic-release": "semantic-release",
     "prepack": "npm run build",
     "fix": "eslint --fix --ext .ts ./",
-    "index": "ts-node src/index.ts"
+    "index": "ts-node src/index.ts",
+    "serve": "ts-node src/server.ts"
   },
   "bin": "./lib/cjs/server.js",
   "release": {

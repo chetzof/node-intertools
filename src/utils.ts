@@ -1,6 +1,11 @@
 import { promises as fs } from 'fs'
+import { createServer } from 'http'
 import path from 'path'
 
+import { RawServerBase } from 'fastify'
+import { vi } from 'vitest'
+
+export const testEndpoint = '/fake-endpoint'
 export const cacheKey =
   'https://raw.githubusercontent.com/fastify/fastify-reply-from/master/index.js'
 export const cacheDir = path.resolve('./node_modules/.cache/node-intercache')
@@ -10,3 +15,29 @@ export const cachePath = path.join(cacheDir, cacheHashedKey)
 
 export const removeCacheDir = async (): Promise<void> =>
   await fs.rm(cachePath, { recursive: true, force: true })
+
+export function createTargetServer(): {
+  spyHandler: ReturnType<typeof vi.fn>
+  targetServer: ReturnType<typeof createServer>
+} {
+  const spyHandler = vi.fn((req, res) => {
+    res.statusCode = 200
+    res.setHeader('Content-Type', 'text/plain')
+    res.end('hit')
+  })
+  return {
+    spyHandler,
+    targetServer: createServer(spyHandler),
+  }
+}
+
+export function getServerPort(
+  server: RawServerBase | ReturnType<typeof createServer>,
+): number {
+  const address = server.address()
+  if (address && typeof address === 'object') {
+    return address.port
+  }
+
+  throw new Error('Cannot get server port')
+}

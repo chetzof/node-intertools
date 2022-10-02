@@ -1,8 +1,6 @@
-import replyFrom from '@fastify/reply-from'
-import fastify, { FastifyInstance } from 'fastify'
 import nock from 'nock'
 
-import { FileCache } from './file-cache'
+import { createServer } from './server'
 
 export function intercept({ ttl }: { ttl?: number } = {}): () => void {
   const server = createServer({ ttl })
@@ -25,30 +23,4 @@ export function intercept({ ttl }: { ttl?: number } = {}): () => void {
     })
 
   return () => nock.cleanAll()
-}
-
-export function createServer({ ttl }: { ttl?: number } = {}): FastifyInstance {
-  const server = fastify()
-  const cache = new FileCache({
-    ttl,
-  })
-  void server.register(replyFrom)
-  server.all('/*', async (request, reply) => {
-    const url = request.url.slice(1)
-    const response = await cache.get(url)
-    return !response
-      ? reply.from(url, {
-          async onResponse(_request, reply, res) {
-            void reply.send(res)
-            if (cache.ttl) {
-              // @ts-expect-error The options property is not defined on the interface
-              const cacheContent = (await res.text()) as string
-              await cache.set(url, cacheContent)
-            }
-          },
-        })
-      : reply.send(response)
-  })
-
-  return server
 }

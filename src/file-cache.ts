@@ -35,7 +35,6 @@ export class FileCache {
   async get(key: string): Promise<string | undefined> {
     const path = getCacheFilePath(key)
     const stat = await cacheFileExists(path)
-
     if (!stat) {
       return
     }
