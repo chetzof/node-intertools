@@ -3,8 +3,9 @@ import { setTimeout } from 'timers/promises'
 
 import { expect, it, beforeEach } from 'vitest'
 
-import { FileCache } from '../src/file-cache'
-import { cacheKey, cachePath, removeCacheDir } from '../src/utils'
+import { cacheKey, cachePath, removeCacheDir } from './utils'
+
+import { FileCache } from '../src/shared/file-cache'
 
 beforeEach(removeCacheDir)
 
@@ -53,6 +54,6 @@ it('getting an existing key with non-expired ttl returns its value', async () =>
 it('calling deleteAll() should remove the cache folder', async () => {
   const fileCache = new FileCache()
   await fileCache.set('foo', 'bar')
-  await fileCache.deleteAll()
+  await FileCache.deleteAll()
   await expect(() => fs.readFile(cachePath)).rejects.toThrow()
 })

@@ -4,8 +4,9 @@ import { promises as fs } from 'fs'
 import got from 'got'
 import { afterAll, afterEach, beforeEach, expect, it } from 'vitest'
 
+import { cachePath, removeCacheDir } from './utils'
+
 import { intercept } from '../src'
-import { cachePath, removeCacheDir } from '../src/utils'
 
 beforeEach(removeCacheDir)
 afterAll(removeCacheDir)

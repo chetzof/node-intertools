@@ -17,12 +17,13 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:@typescript-eslint/strict',
-    'plugin:unicorn/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
     'plugin:sonarjs/recommended',
     'plugin:promise/recommended',
+    'canonical',
+    'canonical/prettier',
     'prettier',
   ],
 
@@ -50,6 +51,7 @@ module.exports = {
     '@typescript-eslint/type-annotation-spacing': 'warn',
     '@typescript-eslint/array-type': ['warn', { default: 'array-simple' }],
     '@typescript-eslint/consistent-indexed-object-style': 'warn',
+    '@typescript-eslint/semi': 'off',
 
     // in plain CommonJS modules, you can't use `import foo = require('foo')` to pass this rule, so it has to be disabled
     '@typescript-eslint/no-var-requires': 'off',
@@ -136,16 +138,40 @@ module.exports = {
     'unicorn/no-abusive-eslint-disable': 'off',
     'sonarjs/no-all-duplicated-branches': 'warn',
   },
-  // settings: {
-  //   'import/internal-regex': '^@/',
-  //   'import/resolver': {
-  //     alias: {
-  //       map: [['@']],
-  //       extensions: ['.ts', '.js', '.vue'],
-  //     },
-  //     typescript: {
-  //       project: 'configs/tsconfig.esm.json',
-  //     },
-  //   },
-  // },
+  overrides: [
+    {
+      extends: ['canonical/typescript'],
+      files: '*.ts',
+      parserOptions: {
+        project: './tsconfig.json',
+      },
+      rules: {
+        '@typescript-eslint/semi': 'off',
+        '@typescript-eslint/space-before-function-paren': 'off',
+        '@typescript-eslint/member-delimiter-style': [
+          'warn',
+          {
+            multiline: {
+              delimiter: 'semi',
+              requireLast: true,
+            },
+            singleline: {
+              delimiter: 'semi',
+              requireLast: false,
+            },
+            multilineDetection: 'brackets',
+          },
+        ],
+        'func-style': 'off',
+      },
+    },
+    {
+      extends: ['canonical/json'],
+      files: '*.json',
+    },
+    {
+      extends: ['canonical/yaml'],
+      files: '*.yaml',
+    },
+  ],
 }

@@ -2,7 +2,6 @@ import { promises as fs } from 'fs'
 import { createServer } from 'http'
 import path from 'path'
 
-import { RawServerBase } from 'fastify'
 import { vi } from 'vitest'
 
 export const testEndpoint = '/fake-endpoint'
@@ -29,15 +28,4 @@ export function createTargetServer(): {
     spyHandler,
     targetServer: createServer(spyHandler),
   }
-}
-
-export function getServerPort(
-  server: RawServerBase | ReturnType<typeof createServer>,
-): number {
-  const address = server.address()
-  if (address && typeof address === 'object') {
-    return address.port
-  }
-
-  throw new Error('Cannot get server port')
 }

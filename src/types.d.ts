@@ -3,3 +3,7 @@ declare module 'find-cache-dir' {
     options: findCacheDir.OptionsWithThunk,
   ): (...pathParts: string[]) => string
 }
+
+declare module 'pino-colada' {
+  export default function (): (...args: any[]) => any
+}

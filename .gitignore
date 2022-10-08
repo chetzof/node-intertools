@@ -108,10 +108,4 @@ dist
 lib
 *.tgz
 .idea
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
+oclif.manifest.json

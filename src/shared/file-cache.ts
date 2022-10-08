@@ -1,13 +1,7 @@
 import { createHash } from 'crypto'
 import { promises as fs, Stats } from 'fs'
 
-import findCacheDir from 'find-cache-dir'
-
-const thunk = findCacheDir({ name: 'node-intercache', thunk: true })
-
-function getCacheDirThunk(file?: string): string {
-  return file ? thunk(file) : thunk()
-}
+import { getCacheDirThunk } from './misc'
 
 async function cacheFileExists(filePath: string): Promise<Stats | undefined> {
   try {
@@ -32,6 +26,10 @@ export class FileCache {
     this.ttl = ttl
   }
 
+  static async deleteAll(): Promise<void> {
+    await fs.rm(getCacheDirThunk(), { recursive: true, force: true })
+  }
+
   async get(key: string): Promise<string | undefined> {
     const path = getCacheFilePath(key)
     const stat = await cacheFileExists(path)
@@ -54,9 +52,5 @@ export class FileCache {
     await fs.mkdir(getCacheDirThunk(), { recursive: true })
 
     await fs.writeFile(getCacheFilePath(key), value)
-  }
-
-  async deleteAll(): Promise<void> {
-    await fs.rm(thunk(), { recursive: true, force: true })
   }
 }

@@ -2,13 +2,9 @@
 import got from 'got'
 import { afterAll, beforeAll, expect, it } from 'vitest'
 
-import { createServer } from '../src/server'
-import {
-  createTargetServer,
-  getServerPort,
-  removeCacheDir,
-  testEndpoint,
-} from '../src/utils'
+import { createTargetServer, removeCacheDir, testEndpoint } from './utils'
+
+import { createServer, getServerPort } from '../src/shared/server'
 
 const proxyServer = createServer({ ttl: 100 })
 
