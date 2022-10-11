@@ -13,11 +13,11 @@ export const cacheHashedKey =
 export const cachePath = path.join(cacheDir, cacheHashedKey)
 
 export const removeCacheDir = async (): Promise<void> =>
-  await fs.rm(cachePath, { recursive: true, force: true })
+  await fs.rm(cachePath, { force: true, recursive: true })
 
 export function createTargetServer(): {
-  spyHandler: ReturnType<typeof vi.fn>
-  targetServer: ReturnType<typeof createServer>
+  spyHandler: ReturnType<typeof vi.fn>;
+  targetServer: ReturnType<typeof createServer>;
 } {
   const spyHandler = vi.fn((req, res) => {
     res.statusCode = 200

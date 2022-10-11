@@ -1,7 +1,8 @@
 import { createHash } from 'crypto'
-import { promises as fs, Stats } from 'fs'
+import { promises as fs, type Stats } from 'fs'
 
 import { getCacheDirThunk } from './misc'
+
 
 async function cacheFileExists(filePath: string): Promise<Stats | undefined> {
   try {
@@ -27,7 +28,7 @@ export class FileCache {
   }
 
   static async deleteAll(): Promise<void> {
-    await fs.rm(getCacheDirThunk(), { recursive: true, force: true })
+    await fs.rm(getCacheDirThunk(), { force: true, recursive: true })
   }
 
   async get(key: string): Promise<string | undefined> {
@@ -37,7 +38,7 @@ export class FileCache {
       return
     }
 
-    const maxAgeMs = Date.now() - this.ttl * 1000
+    const maxAgeMs = Date.now() - this.ttl * 1_000
 
     if (maxAgeMs >= Math.trunc(stat.birthtimeMs)) {
       await fs.unlink(path)

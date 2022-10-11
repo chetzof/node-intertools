@@ -2,7 +2,7 @@ import pino from 'pino'
 import pinoColada from 'pino-colada'
 import pinoPretty from 'pino-pretty'
 
-import { getCacheDirThunk } from './shared/misc'
+import { getCacheDirThunk } from './misc'
 
 export const logFilePath = getCacheDirThunk('log')
 export type Logger = ReturnType<typeof pino>
@@ -15,8 +15,8 @@ export function createFileLogger(): Logger {
 export function createStdoutLogger(): Logger {
   return pino(
     pinoPretty({
-      ignore: 'pid,hostname,name,time',
       hideObject: true,
+      ignore: 'pid,hostname,name,time',
       levelKey: '',
       messageFormat: pinoColada(),
       singleLine: true,

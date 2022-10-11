@@ -1,6 +1,6 @@
 {
-  "extends": "./configs/tsconfig.esm.json",
-  "include": ["./src/**/*", "./tests/**/*"],
+  "extends": "./configs/tsconfig.node.cjs.json",
+  "include": ["./src/**/*", "./tests/**/*", "./*"],
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS"

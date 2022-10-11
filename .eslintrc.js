@@ -3,7 +3,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     tsconfigRootDir: __dirname,
-    project: ['./configs/tsconfig.lint.json'],
+    project: ['./tsconfig.json'],
   },
   env: {
     browser: true,
@@ -147,12 +147,13 @@ module.exports = {
       },
       rules: {
         '@typescript-eslint/semi': 'off',
+        '@typescript-eslint/indent': 'off',
         '@typescript-eslint/space-before-function-paren': 'off',
         '@typescript-eslint/member-delimiter-style': [
           'warn',
           {
             multiline: {
-              delimiter: 'semi',
+              delimiter: 'none',
               requireLast: true,
             },
             singleline: {
@@ -163,6 +164,7 @@ module.exports = {
           },
         ],
         'func-style': 'off',
+        'canonical/filename-match-exported': 'off',
       },
     },
     {

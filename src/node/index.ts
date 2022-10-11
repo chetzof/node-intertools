@@ -1,11 +1,15 @@
 import nock from 'nock'
 
-import { createFileLogger } from './logger'
+import { type Logger, createFileLogger } from './shared/logger'
 import { createServer } from './shared/server'
 
-export function intercept ({ ttl }: { ttl?: number, } = {}): () => void {
-  const logger = createFileLogger()
-  const server = createServer({ logger, ttl })
+export function intercept({
+  ttl,
+  customLogger,
+}: { customLogger?: Logger; ttl?: number } = {}): () => void {
+  const logger = customLogger ?? createFileLogger()
+  const server = createServer({ cors: false, logger, ttl })
+
   nock(/.*/u)
     .persist()
     .get(/.*/u)

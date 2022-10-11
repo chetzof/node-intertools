@@ -1,9 +1,9 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "module": "ESNext",
-    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
     "outDir": "../lib/esm",
     "declarationDir": "../lib/esm/types"
-  }
+  },
+  "files": ["../src/node/index.ts", "../src/types.d.ts"]
 }
