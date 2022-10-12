@@ -31,7 +31,7 @@
     "prepack": "npm run build",
     "check": "tsc --noEmit",
     "fix": "eslint --fix --ext .ts ./src && prettier",
-    "dev": "vite",
+    "run-e2e-test-server": "cd ./tests/e2e/server && vite",
     "vite-build": "tsc && vite build",
     "preview": "vite preview",
     "init": "msw init tests/e2e/server --save"

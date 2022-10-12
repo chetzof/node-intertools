@@ -106,7 +106,7 @@ const config: PlaywrightTestConfig = {
   //   port: 3000,
   // },
   webServer: {
-    command: 'npm run dev',
+    command: 'npm run run-e2e-test-server',
     port: 5_173,
     reuseExistingServer: !process.env['CI'],
   },

@@ -4,8 +4,9 @@ import { defineConfig } from 'vitest/config'
 export default defineConfig({
   clearScreen: true,
   test: {
-    include: ['tests/**/*.test.ts'],
-    globals: true,
     clearMocks: true,
+    exclude: ['tests/e2e/**/*'],
+    globals: true,
+    include: ['tests/**/*.test.ts'],
   },
 })
