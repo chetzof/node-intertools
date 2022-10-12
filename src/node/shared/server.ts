@@ -32,6 +32,7 @@ export function createServer({
         ? `http://localhost:${getServerPort(corsServer)}/${directURL}`
         : directURL
   )()
+  server.get('/status', async (request, reply) => 'hello')
 
   server.all('/*', async (externalRequest, externalReply) => {
     const url = externalRequest.url.slice(1)
