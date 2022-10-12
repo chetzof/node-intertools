@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "lib": [
-      "es2021"
+      "es2021",  "DOM"
     ],
     "target": "es2021",
     "strict": true,

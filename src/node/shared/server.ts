@@ -49,7 +49,6 @@ export function createServer({
       name: 'proxy',
       url,
     })
-
     externalReply.from(getMaybeProxiedURL(url), {
       async onResponse(request, reply, res) {
         void reply.send(res)

@@ -1,22 +1,14 @@
 import { test, expect } from '@playwright/test'
 
-test('homepage has Playwright in title and get started link linking to the intro page', async ({
-  page,
-}) => {
-  await page.goto('https://playwright.dev/')
+import { createServer } from '../../src/node/shared/server'
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/u)
+test('the contains the endpoint response', async ({ page }) => {
+  const server = createServer()
+  await server.listen({ port: 5_174 })
+  await page.goto('http://127.0.0.1:5173/')
 
   // create a locator
-  const getStarted = page.locator('text=Get Started')
+  await expect(page.locator('h1')).toHaveText('Example Domain')
 
-  // Expect an attribute "to be strictly equal" to the value.
-  await expect(getStarted).toHaveAttribute('href', '/docs/intro')
-
-  // Click the get started link.
-  await getStarted.click()
-
-  // Expects the URL to contain intro.
-  await expect(page).toHaveURL(/.*intro/u)
+  await server.close()
 })

@@ -4,9 +4,9 @@ import { getLogger } from '../../shared/logger'
 import { createServer, getServerPort } from '../../shared/server'
 
 export default class StartServer extends Command {
-  static override description = 'Start proxy server'
+  public static override description = 'Start proxy server'
 
-  static override flags = {
+  public static override flags = {
     port: Flags.integer({ default: 3_000, min: 0 }),
     ttl: Flags.integer({ default: 10, min: 0 }),
   }
@@ -14,7 +14,7 @@ export default class StartServer extends Command {
   public async run(): Promise<void> {
     const logger = getLogger()
     const { flags } = await this.parse(StartServer)
-    const server = await createServer({ logger, ttl: flags.ttl })
+    const server = createServer({ logger, ttl: flags.ttl })
     try {
       await server.listen({ port: flags.port })
     } catch (error) {

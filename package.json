@@ -30,7 +30,11 @@
     "semantic-release": "semantic-release",
     "prepack": "npm run build",
     "check": "tsc --noEmit",
-    "fix": "eslint --fix --ext .ts ./src && prettier"
+    "fix": "eslint --fix --ext .ts ./src && prettier",
+    "dev": "vite",
+    "vite-build": "tsc && vite build",
+    "preview": "vite preview",
+    "init": "msw init tests/e2e/server --save"
   },
   "release": {
     "branches": [
@@ -127,5 +131,8 @@
         "description": "Say hello to the world and others"
       }
     }
+  },
+  "msw": {
+    "workerDirectory": "tests/e2e/server"
   }
 }
