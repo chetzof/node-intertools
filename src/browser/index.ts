@@ -14,7 +14,7 @@ export async function intercept({ port = 9_555 }: { port: number }) {
   const worker = setupWorker(
     rest.all(/\/.*\//u, async (req, res, ctx) => {
       const originalResponse = await ctx.fetch(
-        `http://localhost:${port}/${req.url.href}`,
+        `http://127.0.0.1:${port}/${req.url.href}`,
       )
       const originalResponseData = await originalResponse.text()
       // eslint-disable-next-line @typescript-eslint/return-await
