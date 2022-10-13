@@ -7,7 +7,7 @@ export default class StartServer extends Command {
   public static override description = 'Start proxy server'
 
   public static override flags = {
-    port: Flags.integer({ default: 3_000, min: 0 }),
+    port: Flags.integer({ default: 9_555, min: 0 }),
     ttl: Flags.integer({ default: 10, min: 0 }),
   }
 

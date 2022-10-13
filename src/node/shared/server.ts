@@ -7,6 +7,8 @@ import fastify, { type FastifyInstance, type RawServerBase } from 'fastify'
 import { FileCache } from './file-cache'
 import { type Logger } from './logger'
 
+import { name, version } from '../../../package.json'
+
 export function createServer({
   ttl,
   logger,
@@ -32,7 +34,8 @@ export function createServer({
         ? `http://localhost:${getServerPort(corsServer)}/${directURL}`
         : directURL
   )()
-  server.get('/status', async (request, reply) => 'hello')
+
+  server.get('/status', async () => `${name} ${version}`)
 
   server.all('/*', async (externalRequest, externalReply) => {
     const url = externalRequest.url.slice(1)
